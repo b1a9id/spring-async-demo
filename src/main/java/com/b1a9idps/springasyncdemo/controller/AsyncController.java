@@ -26,6 +26,7 @@ public class AsyncController {
         LOGGER.info("Start.");
 
         asyncService.save();
-        return new AsyncResponse("success.");
+
+        return new AsyncResponse("success");
     }
 }

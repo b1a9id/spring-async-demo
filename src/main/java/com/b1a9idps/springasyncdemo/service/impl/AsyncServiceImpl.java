@@ -7,6 +7,7 @@ import org.springframework.retry.annotation.Retryable;
 import org.springframework.scheduling.annotation.Async;
 import org.springframework.stereotype.Service;
 
+import com.b1a9idps.springasyncdemo.dto.request.AsyncRequest;
 import com.b1a9idps.springasyncdemo.exception.FailedFileUploadException;
 import com.b1a9idps.springasyncdemo.infrastructure.FileService;
 import com.b1a9idps.springasyncdemo.service.AsyncService;
@@ -25,8 +26,8 @@ public class AsyncServiceImpl implements AsyncService {
     @Override
     @Retryable(value = FailedFileUploadException.class, recover = "saveRecover")
     @Async
-    public void save() {
-        LOGGER.info("Start Async processing.");
+    public void save(AsyncRequest request) {
+        LOGGER.info("Start Async processing.(number = " + request.getNumber() + ")");
 
         try {
             Thread.sleep(500);
@@ -35,7 +36,7 @@ public class AsyncServiceImpl implements AsyncService {
             LOGGER.error("thrown InterruptedException.");
         }
 
-        LOGGER.info("End Async processing.");
+        LOGGER.info("End Async processing.(number = " + request.getNumber() + ")");
     }
 
     @Recover

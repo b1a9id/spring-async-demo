@@ -3,9 +3,11 @@ package com.b1a9idps.springasyncdemo.controller;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.web.bind.annotation.PostMapping;
+import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
+import com.b1a9idps.springasyncdemo.dto.request.AsyncRequest;
 import com.b1a9idps.springasyncdemo.dto.response.AsyncResponse;
 import com.b1a9idps.springasyncdemo.service.AsyncService;
 
@@ -22,10 +24,10 @@ public class AsyncController {
     }
 
     @PostMapping
-    public AsyncResponse save() {
-        LOGGER.info("Start.");
+    public AsyncResponse save(@RequestBody AsyncRequest request) {
+        LOGGER.info("Start.(number = " + request.getNumber() + ")");
 
-        asyncService.save();
+        asyncService.save(request);
 
         return new AsyncResponse("success");
     }

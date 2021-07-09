@@ -40,7 +40,7 @@ public class AsyncServiceImpl implements AsyncService {
     }
 
     @Recover
-    private void saveRecover(FailedFileUploadException e) {
-        LOGGER.error("failed to upload file", e);
+    private void saveRecover(FailedFileUploadException e, AsyncRequest request) {
+        LOGGER.error("failed to upload file(number = " + request.getNumber() + ")", e);
     }
 }

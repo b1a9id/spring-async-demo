@@ -7,4 +7,5 @@ do
   curl -X POST -H "Content-Type: application/json" -d '{"number" : "'$number'"}'  http://localhost:8080/async
   echo ''
   number=$(expr $number + 1)
+  sleep 0.1s;
 done
